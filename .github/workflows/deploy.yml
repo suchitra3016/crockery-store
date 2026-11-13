@@ -1,0 +1,109 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# One run per branch at a time. A newer push to main waits for the running deployment to finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint (ESLint and HTMLHint)
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+
+  deploy:
+    name: Deploy to AWS
+    needs: test                       # a failed lint or test stops the deployment here
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      id-token: write                 # lets GitHub issue the OIDC token that AWS trusts
+      contents: read
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      CF_DISTRIBUTION_ID: ${{ vars.CF_DISTRIBUTION_ID }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check repository variables
+        run: |
+          missing=0
+          for v in AWS_REGION S3_BUCKET CF_DISTRIBUTION_ID; do
+            if [ -z "${!v}" ]; then echo "::error::Repository variable $v is not set"; missing=1; fi
+          done
+          if [ -z "${{ vars.AWS_ROLE_ARN }}" ]; then echo "::error::Repository variable AWS_ROLE_ARN is not set"; missing=1; fi
+          exit $missing
+
+      - name: Keep a copy of what is being deployed
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-${{ github.sha }}
+          path: site
+          retention-days: 30
+
+      - name: Sign in to AWS with OIDC (no stored keys)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: gh-${{ github.run_id }}
+
+      - name: Upload HTML (never cached by browsers)
+        run: |
+          aws s3 sync site "s3://$S3_BUCKET" --delete \
+            --exclude "*" --include "*.html" \
+            --cache-control "no-cache"
+
+      - name: Upload CSS and JavaScript (cached 5 minutes)
+        run: |
+          aws s3 sync site "s3://$S3_BUCKET" --delete \
+            --exclude "*" --include "css/*" --include "js/*" \
+            --cache-control "public, max-age=300"
+
+      - name: Upload images and logo (cached 1 day)
+        run: |
+          aws s3 sync site "s3://$S3_BUCKET" --delete \
+            --exclude "*" --include "assets/*" \
+            --cache-control "public, max-age=86400"
+
+      - name: Clear the CloudFront cache
+        id: invalidate
+        run: |
+          id=$(aws cloudfront create-invalidation \
+            --distribution-id "$CF_DISTRIBUTION_ID" --paths "/*" \
+            --query Invalidation.Id --output text)
+          echo "invalidation_id=$id" >> "$GITHUB_OUTPUT"
+
+      - name: Deployment summary
+        run: |
+          {
+            echo "### Deployed"
+            echo "- Commit: \`${{ github.sha }}\`"
+            echo "- Bucket: \`$S3_BUCKET\`"
+            echo "- CloudFront invalidation: \`${{ steps.invalidate.outputs.invalidation_id }}\`"
+            if [ -n "${{ vars.WEBSITE_URL }}" ]; then echo "- Site: ${{ vars.WEBSITE_URL }}"; fi
+          } >> "$GITHUB_STEP_SUMMARY"
