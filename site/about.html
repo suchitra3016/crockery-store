@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <title>About | Tidewell Ceramics</title>
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-head"><div class="container">
+      <h1>About Tidewell</h1>
+      <p class="muted">A small studio making stoneware for everyday tables. (Tidewell is a fictional brand created for a demo project.)</p>
+    </div></section>
+
+    <section class="section"><div class="container split">
+      <div>
+        <h2>Our story</h2>
+        <p>Tidewell started in a shared garage in Portland, with one second-hand kiln and a stack of test tiles. We wanted plates that felt good in the hand, survived the dishwasher and still looked good after five years.</p>
+        <p>Today a team of eight throws, glazes and fires every piece in the same studio. We make in batches of about forty, so each glaze comes out slightly different, and we think that is the point.</p>
+      </div>
+      <img id="about-img" alt="Tide teapot and mug on a table">
+    </div></section>
+
+    <section class="section section--stone"><div class="container">
+      <h2>What we believe</h2>
+      <div class="values">
+        <div><h3>Use it every day</h3><p>Tableware should live on the table, not in a cabinet. Everything we make goes safely in the oven, microwave and dishwasher.</p></div>
+        <div><h3>Fewer, better pieces</h3><p>We make six shapes in four glazes. Every shape matches every glaze, so you can build a set slowly.</p></div>
+        <div><h3>Made to last</h3><p>Our stoneware is fired at 1,260 C until it is dense and hard-wearing. If a piece chips in the first ten years, we replace it.</p></div>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="container">
+      <div class="section-head"><h2>Our collections</h2><a href="shop.html">Shop all</a></div>
+      <div class="tiles" id="collections"></div>
+    </div></section>
+
+    <section class="section section--stone"><div class="container">
+      <h2>Quality and design</h2>
+      <ul class="facts">
+        <li>High-fired stoneware, food-safe glazes, lead-free</li>
+        <li>Rounded rims and thick walls to resist chipping</li>
+        <li>Stackable shapes that save cupboard space</li>
+        <li>Every piece checked by hand before it is packed</li>
+      </ul>
+      <p style="margin-top:1.5rem"><a class="btn" href="shop.html">Browse the range</a></p>
+    </div></section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/products.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    (function () {
+      var D = window.TidewellData;
+      document.getElementById('about-img').src = D.getProduct(6).images[2];
+      document.getElementById('collections').innerHTML = D.COLLECTIONS.map(function (c) {
+        var p = D.PRODUCTS.filter(function (x) { return x.collection === c.name && x.category === 'Bowls'; })[0];
+        return '<a class="tile tile--collection" style="--c:' + c.color + '" href="shop.html?collection=' + c.name + '">' +
+          '<img src="' + p.images[0] + '" alt="' + c.name + ' collection" loading="lazy">' +
+          '<div class="tile-body"><h3>' + c.name + '</h3><p>' + c.blurb + '</p></div></a>';
+      }).join('');
+    })();
+  </script>
+</body>
+</html>

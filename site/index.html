@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <title>Tidewell Ceramics | Everyday stoneware</title>
+  <meta name="description" content="Small-batch stoneware plates, bowls, mugs and serveware. A fictional demo brand.">
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="hero"><div class="container hero-grid">
+      <div>
+        <h1>Tableware that looks better the longer you use it.</h1>
+        <p>Stoneware plates, bowls and mugs, glazed by hand and fired in small batches. Made to be used every day, and to last for years.</p>
+        <div class="hero-actions">
+          <a class="btn" href="shop.html">Shop all products</a>
+          <a class="btn btn--ghost" href="about.html">Our story</a>
+        </div>
+      </div>
+      <div class="hero-stage" id="hero-stage" aria-hidden="true"></div>
+    </div></section>
+
+    <div class="promo"><div class="container"><p>Free demo shipping on orders over $100. <a href="shop.html">Start shopping</a></p></div></div>
+
+    <section class="section"><div class="container">
+      <div class="section-head"><h2>Four glazes, one table</h2><a href="shop.html">View all collections</a></div>
+      <div class="tiles" id="collections"></div>
+    </div></section>
+
+    <section class="section section--stone"><div class="container">
+      <div class="section-head"><h2>Bestsellers</h2><a href="shop.html">Shop all</a></div>
+      <div class="grid grid--4" id="bestsellers"></div>
+    </div></section>
+
+    <section class="section"><div class="container">
+      <div class="section-head"><h2>Shop by category</h2></div>
+      <div class="tiles" id="categories"></div>
+    </div></section>
+
+    <section class="section section--stone"><div class="container">
+      <div class="section-head"><h2>New arrivals</h2><a href="shop.html">Shop all</a></div>
+      <div class="grid grid--4" id="arrivals"></div>
+    </div></section>
+
+    <section class="section"><div class="container split">
+      <img id="brand-img" alt="A Tidewell Tide teapot and mug">
+      <div>
+        <h2>Made slowly, made to last</h2>
+        <p>Tidewell began with one kiln and a simple idea: everyday plates should be a pleasure to eat from. Every piece is thrown, glazed and fired in our Portland studio.</p>
+        <ul class="facts">
+          <li>High-fired stoneware that resists chips and stains</li>
+          <li>Dishwasher, microwave and oven safe</li>
+          <li>Glazes mixed in-house, so every batch is slightly unique</li>
+        </ul>
+        <p style="margin-top:1.5rem"><a class="btn btn--ghost" href="about.html">Read our story</a></p>
+      </div>
+    </div></section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/products.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

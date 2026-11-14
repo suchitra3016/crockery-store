@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <title>FAQ | Tidewell Ceramics</title>
+  <style>
+    .faq{max-width:760px}
+    .faq details{border-bottom:1px solid var(--stone);padding:1rem 0}
+    .faq summary{cursor:pointer;font:500 1.2rem var(--serif);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";font:400 1.5rem var(--sans);color:var(--glaze)}
+    .faq details[open] summary::after{content:"\2212"}
+    .faq details p{margin:.7rem 0 0;color:var(--slate)}
+  </style>
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-head"><div class="container">
+      <h1>Frequently asked questions</h1>
+      <p class="muted">Tidewell is a fictional demo brand, so these answers describe how a real store might work.</p>
+    </div></section>
+    <section class="section"><div class="container faq">
+      <details><summary>Is this a real store?</summary><p>No. Tidewell Ceramics is a demo project. You can browse, fill a cart and place a demo order, but nothing is charged, shipped or stored.</p></details>
+      <details><summary>Are the pieces dishwasher and microwave safe?</summary><p>Yes. Every piece is high-fired stoneware that is safe in the dishwasher, microwave and oven up to 220 C. Avoid sudden temperature changes, such as moving a dish from the freezer to a hot oven.</p></details>
+      <details><summary>Are the glazes food safe?</summary><p>Yes. All glazes are lead-free and tested for food contact.</p></details>
+      <details><summary>Why does my piece look slightly different from the photo?</summary><p>We mix glazes in small batches, so colour and pooling vary a little from piece to piece. This is normal and is part of handmade ceramics.</p></details>
+      <details><summary>How much is shipping?</summary><p>Shipping is a flat $8 and is free on orders of $100 or more. Orders usually ship within three working days.</p></details>
+      <details><summary>What is your returns policy?</summary><p>You can return unused pieces in their original packaging within 30 days. If a piece arrives damaged, contact us with a photo and we will send a replacement.</p></details>
+      <details><summary>What if a piece chips?</summary><p>We replace any piece that chips within ten years of normal use.</p></details>
+      <details><summary>Can I buy a single piece or must I buy a set?</summary><p>You can buy any piece on its own. Every shape fits every glaze, so you can build a set over time.</p></details>
+      <details><summary>How do I contact you?</summary><p>Use the <a href="contact.html">contact form</a> or email hello@tidewell.example.</p></details>
+    </div></section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/layout.js"></script>
+</body>
+</html>

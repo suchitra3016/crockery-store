@@ -1,0 +1,39 @@
+/* Page-specific styles: home, about, contact */
+.hero{background:var(--stone);padding:clamp(2.5rem,6vw,5rem) 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.hero h1{max-width:12ch}
+.hero p{font-size:1.15rem;color:var(--slate)}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+.hero-stage{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:.9rem}
+.hero-stage img{width:100%;height:100%;object-fit:cover;border-radius:2px}
+.hero-stage .tall{grid-row:1/3}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.hero h1{max-width:none}}
+
+.promo{background:var(--glaze);color:#fff;padding:1rem 0;text-align:center}
+.promo p{margin:0 auto;max-width:none}
+.promo a{color:#fff}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.tile{position:relative;display:block;text-decoration:none;color:var(--ink);background:var(--stone);overflow:hidden}
+.tile img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .4s}
+.tile:hover img{transform:scale(1.04)}
+.tile-body{padding:1rem 1.1rem 1.2rem}
+.tile-body h3{margin-bottom:.2rem}
+.tile-body p{margin:0;font-size:.92rem;color:var(--slate)}
+.tile--collection{border-top:6px solid var(--c,var(--glaze))}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4rem);align-items:center}
+.split img{width:100%;border-radius:2px}
+.facts{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.6rem}
+.facts li{padding-left:1.2rem;position:relative}
+.facts li::before{content:"";position:absolute;left:0;top:.7em;width:.55rem;height:2px;background:var(--glaze)}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+
+.contact-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(1.5rem,5vw,4rem)}
+.contact-card{background:var(--white);padding:1.5rem;border:1px solid var(--stone)}
+.contact-card h3{margin-top:0}
+.contact-card address{font-style:normal}
+.map-box{margin-top:1rem;aspect-ratio:16/9;background:linear-gradient(135deg,#DCE5E0,#C9D6CF);display:grid;place-items:center;color:var(--slate);font-size:.9rem;text-align:center;padding:1rem}
+@media (max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.values h3{margin-bottom:.3rem}

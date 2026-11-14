@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <title>Checkout | Tidewell Ceramics</title>
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-head"><div class="container"><h1>Checkout</h1>
+      <p class="muted">Demo only. No payment is taken and no real order is placed.</p></div></section>
+    <section class="section" style="padding-top:2rem"><div class="container">
+      <div id="confirmation" class="confirm" role="status" hidden></div>
+      <div id="checkout-empty" hidden style="padding:3rem 1rem;text-align:center;background:var(--white);border:1px dashed #B9C3BE">
+        <h2>Nothing to check out</h2><p style="margin-inline:auto">Your cart is empty.</p><a class="btn" href="shop.html">Browse the shop</a></div>
+      <div class="cart-layout" id="checkout-content">
+        <form id="checkout-form" novalidate>
+          <h2>Delivery details</h2>
+          <div class="field"><label for="name">Full name</label><input id="name" autocomplete="name"><div class="field-error" id="name-error" aria-live="polite"></div></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email"><div class="field-error" id="email-error" aria-live="polite"></div></div>
+          <div class="field"><label for="address">Street address</label><input id="address" autocomplete="street-address"><div class="field-error" id="address-error" aria-live="polite"></div></div>
+          <div class="form-row">
+            <div class="field"><label for="city">City</label><input id="city" autocomplete="address-level2"><div class="field-error" id="city-error" aria-live="polite"></div></div>
+            <div class="field"><label for="state">State</label><input id="state" maxlength="2" autocomplete="address-level1" placeholder="OR"><div class="field-error" id="state-error" aria-live="polite"></div></div>
+          </div>
+          <div class="field" style="max-width:14rem"><label for="zip">ZIP code</label><input id="zip" inputmode="numeric" autocomplete="postal-code"><div class="field-error" id="zip-error" aria-live="polite"></div></div>
+          <div class="alert" style="margin-bottom:1.2rem">Payment: none required. This demo skips card details on purpose.</div>
+          <button class="btn" type="submit">Place demo order</button>
+        </form>
+        <aside class="summary" aria-label="Order summary">
+          <h2>Your order</h2>
+          <div id="mini-lines"></div>
+          <div class="sum-row" style="margin-top:.8rem"><span>Subtotal</span><span id="sum-subtotal"></span></div>
+          <div class="sum-row"><span>Shipping</span><span id="sum-shipping"></span></div>
+          <div class="sum-row"><span>Tax (8%)</span><span id="sum-tax"></span></div>
+          <div class="sum-row total"><span>Total</span><span id="sum-total"></span></div>
+          <p class="sum-note"><a href="cart.html">Edit cart</a></p>
+        </aside>
+      </div>
+    </div></section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/products.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

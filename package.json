@@ -1,0 +1,19 @@
+{
+  "name": "tidewell-ceramics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static demo e-commerce site (HTML, CSS, JavaScript) deployed to AWS S3 and CloudFront.",
+  "scripts": {
+    "lint:js": "eslint site tests",
+    "lint:html": "htmlhint \"site/*.html\"",
+    "lint": "npm run lint:js && npm run lint:html",
+    "test": "node --test",
+    "check": "npm run lint && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "htmlhint": "^1.1.4"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <title>Shop | Tidewell Ceramics</title>
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-head"><div class="container">
+      <h1>Shop</h1>
+      <p class="muted">Plates, bowls, mugs and serveware in four glazes.</p>
+    </div></section>
+    <section class="section" style="padding-top:2rem"><div class="container">
+      <form class="filters" role="search" aria-label="Filter products" onsubmit="return false">
+        <div class="field field--search"><label for="q">Search</label><input id="q" type="search" placeholder="Try &quot;teapot&quot; or &quot;Fern&quot;" autocomplete="off"></div>
+        <div class="field"><label for="category">Category</label><select id="category"></select></div>
+        <div class="field"><label for="collection">Collection</label><select id="collection"></select></div>
+        <div class="field"><label for="maxPrice">Price</label>
+          <select id="maxPrice"><option value="">Any price</option><option value="25">Up to $25</option><option value="50">Up to $50</option><option value="75">Up to $75</option></select></div>
+        <div class="field"><label for="sort">Sort by</label>
+          <select id="sort"><option value="featured">Featured</option><option value="newest">Newest</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></div>
+        <div class="check"><input type="checkbox" id="inStock"><label for="inStock">In stock only</label></div>
+      </form>
+      <div class="result-bar"><span id="count" class="muted" aria-live="polite"></span><button type="button" class="btn btn--ghost" id="reset">Clear filters</button></div>
+      <div class="grid grid--4" id="results"></div>
+      <div class="empty" id="empty" hidden><h2>No products match</h2><p>Try a different search or clear the filters.</p></div>
+    </div></section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/products.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>
