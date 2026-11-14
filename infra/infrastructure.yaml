@@ -12,6 +12,16 @@ Parameters:
     Type: String
     Default: crockery-store
     Description: GitHub repository name (case-sensitive).
+  GitHubOrgId:
+    Type: String
+    Default: "231582289"
+    AllowedPattern: "^[0-9]+$"
+    Description: Numeric GitHub account ID (GitHub puts it in the sign-in token, see CloudTrail userName).
+  GitHubRepoId:
+    Type: String
+    Default: "1456766364"
+    AllowedPattern: "^[0-9]+$"
+    Description: Numeric GitHub repository ID.
   GitHubBranch:
     Type: String
     Default: main
@@ -145,7 +155,7 @@ Resources:
             Condition:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
-                token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/${GitHubBranch}"
+                token.actions.githubusercontent.com:sub: !Sub "repo:${GitHubOrg}@${GitHubOrgId}/${GitHubRepo}@${GitHubRepoId}:ref:refs/heads/${GitHubBranch}"
       Policies:
         - PolicyName: DeployWebsite
           PolicyDocument:

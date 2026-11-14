@@ -7,7 +7,7 @@
 1. In the AWS Console, set the region to **US East (N. Virginia) us-east-1**.
 2. Open **CloudFormation → Create stack → With new resources**.
 3. Upload `infra/infrastructure.yaml`. Name the stack `tidewell-site`.
-4. Leave the parameters as they are (`suchitra3016`, `crockery-store`, `main`). They are case-sensitive.
+4. Leave the parameters as they are (`suchitra3016`, `crockery-store`, `main`, plus the two numeric IDs `GitHubOrgId` and `GitHubRepoId`). Names are case-sensitive. The IDs come from the `userName` line of the failed sign-in event in CloudTrail (`repo:<owner>@<ownerId>/<repo>@<repoId>:ref:...`).
 5. Tick the IAM acknowledgement and submit. Wait for **CREATE_COMPLETE**.
 6. On the **Outputs** tab, copy `RoleArn`, `BucketName`, `DistributionId` and `WebsiteURL`.
 
@@ -68,7 +68,7 @@ Either revert the commit (`git revert <sha>` then push), which redeploys the old
 | Symptom | Likely cause |
 |---|---|
 | "Repository variable ... is not set" | A variable is missing or misspelled. Add it, then use **Re-run jobs**. |
-| "Not authorized to perform sts:AssumeRoleWithWebIdentity" | Repo name, username or branch does not match the stack parameters (case-sensitive), or the run is not on `main`. |
+| "Not authorized to perform sts:AssumeRoleWithWebIdentity" | The role's trust policy does not match the token. Open the failed event in CloudTrail (Event name `AssumeRoleWithWebIdentity`), read `userName`, and make the stack parameters (name, ID, repo, branch) produce exactly that string. |
 | Deploy job skipped | The run was a pull request or a branch other than `main`. |
 | Website shows an error page right after setup | Nothing has been deployed yet, or CloudFront is still finishing. Wait a few minutes. |
 | Old content still showing | Hard-refresh (Ctrl+F5). CSS and JS cache for 5 minutes. |

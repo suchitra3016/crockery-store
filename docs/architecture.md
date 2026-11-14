@@ -28,7 +28,7 @@
 | **CloudFront** | Serves the site worldwide over HTTPS, redirects HTTP to HTTPS, compresses files and adds standard security headers. The default `*.cloudfront.net` certificate means no domain or certificate setup is needed. |
 | **Origin Access Control (OAC)** | CloudFront signs its requests to S3. The bucket policy allows reads only from this one distribution, so the bucket cannot be read directly. |
 | **IAM OIDC provider** | Tells AWS to trust identity tokens issued by GitHub Actions. |
-| **IAM deploy role** | Assumed by the pipeline. It can be assumed only by repository `suchitra3016/crockery-store` on branch `main`. |
+| **IAM deploy role** | Assumed by the pipeline. It can be assumed only by repository `suchitra3016/crockery-store` (matched by its numeric GitHub IDs) on branch `main`. |
 | **GitHub Actions** | Runs the lint, tests and deployment on every push. |
 | **CloudFormation** | Creates all the AWS resources from `infra/infrastructure.yaml`, so the setup is repeatable and can be deleted cleanly. |
 
@@ -36,7 +36,7 @@
 
 - **No long-lived AWS keys exist anywhere.** The pipeline gets credentials that expire after about an hour.
 - **Least privilege:** the deploy role can only list and write to this one bucket and clear the cache of this one distribution.
-- **Branch lock:** pull requests and other branches cannot assume the role. The trust policy requires the token subject `repo:suchitra3016/crockery-store:ref:refs/heads/main`.
+- **Branch lock:** pull requests and other branches cannot assume the role. The trust policy requires the token subject `repo:suchitra3016@231582289/crockery-store@1456766364:ref:refs/heads/main`. GitHub includes the numeric account and repository IDs in the subject, and matching on them means a deleted and re-created repo with the same name cannot reuse the role.
 - **Private origin:** the bucket is not a public website. Only CloudFront can read it, and only over HTTPS.
 - **Failed builds are never deployed.** The deploy job depends on the lint and test job.
 
